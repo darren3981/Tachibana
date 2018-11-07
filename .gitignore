@@ -6,3 +6,5 @@ Tachibana_token.txt
 txt_test.txt
 joinrole_broke.py
 __pycache__
+.gitignore
+.gitattributes
