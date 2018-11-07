@@ -47,6 +47,10 @@ class Weather:
                 embed.add_field(name='Alerts:', value= myforecast.alerts[0].title , inline=False)
             except:
                 embed.add_field(name='Alerts:', value= 'No alerts currently' , inline=False)
+            try:
+                embed.add_field(name='Alert URL:', value=myforecast.alerts[0].uri , inline=False)
+            except:
+                embed.add_field(name='Alert URL:', value= 'No alerts url' , inline=False)  
             #embed.set_image(url=radar_map)
             embed.set_footer(text='Powered by DarkSky: https://darksky.net/poweredby/')
         return await self.client.say(embed=embed)
