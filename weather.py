@@ -36,9 +36,9 @@ class Weather:
             embed.set_thumbnail(url='https://darksky.net/images/darkskylogo.png')
             embed.add_field(name='Current Temperature:', value='{}F ({:.1f}C)'.format(myforecast.currently.temperature, (myforecast.currently.temperature - 32) * (5 / 9)), inline=True)
             embed.add_field(name='Feels Like:', value='{}F ({:.1f}C)'.format(myforecast.currently.apparentTemperature, (myforecast.currently.apparentTemperature - 32) * (5 / 9)), inline=True)
-            embed.add_field(name='Chance of Precipitation:', value='{}%'.format(myforecast.hourly.precipProbability * 100, inline=False))
+            embed.add_field(name='Chance of Precipitation:', value='{}%'.format(myforecast.currently.precipProbability * 100, inline=False))
             try:#try catch for precipType
-                embed.add_field(name='Type of Precipitation:', value=myforecast.hourly.precipType, inline=True)
+                embed.add_field(name='Type of Precipitation:', value=myforecast.currently.precipType, inline=True)
             except:
                 embed.add_field(name='Type of Precipitation:', value='N/A', inline=True)
             embed.add_field(name='Humidity:', value='{}%'.format(myforecast.currently.humidity * 100, inline=False))
