@@ -8,13 +8,13 @@ class turtle:
 
     @commands.group(name='turtle', pass_context=True)
     async def turtle(self, ctx):
-        if ctx.invoked_subcommand is None:
-            possible_responses = [
+        if ctx.invoked_subcommand is None: #checks for sub command
+            possible_responses = [  #array for possible random choices
                 ':ocean::turtle::turtle: A turtle made it to the water!',
                 ':skull_crossbones::turtle: :skull_crossbones: lmfao you let a turtle die idiot'
             ]
-            turtle_count = ""
-            tchoice = (random.choice(possible_responses))
+            turtle_count = "" 
+            tchoice = (random.choice(possible_responses)) #chooses random choice, checks if random choice is turtle death, updates amount of dead if choice is death and edits .txt file
             if tchoice == possible_responses[1]:
                 tcount = open('turtle.txt','r+')
                 turtle_count = tcount.read()
@@ -25,7 +25,7 @@ class turtle:
                 tcount.close()
             await self.client.say( tchoice + " " + ctx.message.author.mention)
 
-    @turtle.command(pass_context=True)
+    @turtle.command(pass_context=True)  #reads turtle.txt file for count of how many have died
     async def count(self, ctx):
         tcount = open('turtle.txt','r')
         turtle_count = tcount.read()
