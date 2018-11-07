@@ -45,24 +45,11 @@ class Weather:
             embed.add_field(name='Wind Speed:', value='{}mph'.format(myforecast.currently.windSpeed , inline=True))
             try:#try catch for alerts
                 embed.add_field(name='Alerts:', value= myforecast.alerts[0].title , inline=False)
-            except:
-                embed.add_field(name='Alerts:', value= 'No alerts currently' , inline=False)
-            try:
                 embed.add_field(name='Alert URL:', value=myforecast.alerts[0].uri , inline=False)
             except:
-                embed.add_field(name='Alert URL:', value= 'No alerts url' , inline=False)  
-            #embed.set_image(url=radar_map)
+                embed.add_field(name='Alerts:', value= 'No alerts currently' , inline=False)
             embed.set_footer(text='Powered by DarkSky: https://darksky.net/poweredby/')
         return await self.client.say(embed=embed)
-
-    '''async def __error(self, ctx, error):
-        if isinstance(error, commands.MissingRequiredArgument):
-            await self.client.say(error)
-        if isinstance(error, commands.BadArgument):
-            await ctx.send(error)
-        else:
-            traceback.print_tb(error.original.__traceback__)
-            print(error)'''
-
+        
 def setup(client):
     client.add_cog(Weather(client))
