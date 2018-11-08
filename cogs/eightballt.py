@@ -6,7 +6,7 @@ class eightball:
     def __init__(self,client):
         self.client = client
 
-    @commands.command(pass_context=True)    # takes the given text and replies with a random reponse from array
+    @commands.command(pass_context=True,name='8ball',aliases=['eight_ball', 'eightball', '8-ball'])    # takes the given text and replies with a random reponse from array
     async def eight_ball(self,context):
         possible_responses = [
             'That is a resounding no',
