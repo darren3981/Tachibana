@@ -9,7 +9,7 @@ client = commands.Bot(command_prefix = "t.")#sets the bot command prefix to t.
 
 client.remove_command('help')# removes the default discord.py help command to replace with custom help command
 
-extensions = ['eightballt', 'Ping', 'bitcoin', 'ETime', 'CMath', 'turtle', 'weather', 'catgirl', 'help', 'plex2', 'history']
+extensions = ['cogs.eightballt', 'cogs.Ping', 'cogs.bitcoin', 'cogs.ETime', 'cogs.CMath', 'cogs.turtle', 'cogs.weather', 'cogs.catgirl', 'cogs.help', 'cogs.plex2', 'cogs.history', 'cogs.char_search2','cogs.range']
 
 @client.event #sets the bot status and prints servers bot is in every 10 minutes
 async def on_ready():
