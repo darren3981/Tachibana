@@ -29,7 +29,10 @@ class Char_search:
                 embed.add_field(name='Alliance', value=('Character is in ' + Asearch['name'] + ' (' + Asearch['ticker'] + ')'), inline=False)
             except:
                 embed.add_field(name='Alliance', value=(str(Asearch)), inline=False)
-            embed.add_field(name='Total kills:', value= (zdata['shipsDestroyed']), inline=False)
+            try:
+                embed.add_field(name='Total kills:', value= (zdata['shipsDestroyed']), inline=False)
+            except:
+                embed.add_field(name='Total kills:', value= ('zkill deosnt exist'), inline=False)
             
                 
             await self.client.say(embed=embed)
@@ -41,6 +44,7 @@ class Char_search:
         url_search = urllib.parse.quote(name)
         search = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/search/?categories=character&datasource=tranquility&language=en-us&search=' + url_search + '&strict=true'))
         info_url = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/characters/' + str(search['character'][0]) + '/?datasource=tranquility'))
+        zdata = json.load(urllib.request.urlopen('https://zkillboard.com/api/stats/characterID/' + str(search['character'][0]) + '/'))
         try:
             Asearch = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/alliances/' + str(info_url['alliance_id']) + '/?datasource=tranquility'))
         except:
@@ -54,6 +58,10 @@ class Char_search:
             embed.add_field(name='Alliance', value=('Character is in ' + Asearch['name'] + '(' + Asearch['ticker'] + ')'), inline=False)
         except:
              embed.add_field(name='Alliance', value=(str(Asearch)), inline=False)
+        try:
+            embed.add_field(name='Total kills:', value= (zdata['shipsDestroyed']), inline=False)
+        except:
+            embed.add_field(name='Total kills:', value= (zdata['zkill deosnt exist']), inline=False)
         
             
         await self.client.say(embed=embed)
