@@ -23,7 +23,7 @@ class Price:
                 embed.set_thumbnail(url='https://imageserver.eveonline.com/Type/' + str(search['inventory_type'][0]) + '_64.png')
                 embed.add_field(name='current price' , value=str(('{:,}'.format(min_price)) ) + ' isk', inline=False)
             except:
-                embed=discord.Embed(title= 'lol learn to spell please', color=0xfa14e9)
+                embed=discord.Embed(title= 'item doesnt exist or you cant spell (lol)', color=0xfa14e9)
            
            
             await self.client.say(embed=embed)
