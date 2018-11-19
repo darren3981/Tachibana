@@ -10,7 +10,7 @@ class Range:
         self.client = client
     @commands.group(pass_context=True, hidden=True)
     async def range(self, context, sname):
-        search = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/search/?categories=solar_system&datasource=tranquility&language=en-us&search=' + sname + '&strict=true')) #searchs for system name for system id        #print(search['solar_system'][0])
+        search = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/search/?categories=solar_system&datasource=tranquility&language=en-us&search=' + sname + '&strict=false')) #searchs for system name for system id        #print(search['solar_system'][0])
         search_name = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/universe/systems/' + str(search['solar_system'][0]) + '/?datasource=tranquility&language=en-us')) #pulls proper system name based of system id
         system = search_name['name'] 
         range_cap = 'http://evemaps.dotlan.net/range/Thanatos,5/' + str(system) #adds system name to dotlan urls
