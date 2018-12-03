@@ -33,9 +33,9 @@ class Char_search:
                 try:
                     embed.add_field(name='Total kills:', value= (zdata['shipsDestroyed']), inline=False)
                 except:
-                    embed.add_field(name='Total kills:', value= ('zkill deosnt exist'), inline=False)
+                    embed.add_field(name='Total kills:', value= ('zkill doesn\'t exist'), inline=False)
             except:
-                embed=discord.Embed(title= 'character doesnt exist or you cant spell (lol)', color=0xfa14e9)
+                embed=discord.Embed(title= 'character doesn\'t exist or you cant spell (lol)', color=0xfa14e9)
             
                 
             await self.client.say(embed=embed)
@@ -64,9 +64,9 @@ class Char_search:
             try:
                 embed.add_field(name='Total kills:', value= (zdata['shipsDestroyed']), inline=False)
             except:
-                embed.add_field(name='Total kills:', value= (zdata['zkill deosnt exist']), inline=False)
+                embed.add_field(name='Total kills:', value= (zdata['zkill doesn\'t exist']), inline=False)
         except:
-            embed=discord.Embed(title= 'character doesnt exist or you cant spell (lol)', color=0xfa14e9)
+            embed=discord.Embed(title= 'character doesn\'t exist or you cant spell (lol)', color=0xfa14e9)
             
         await self.client.say(embed=embed)
 
