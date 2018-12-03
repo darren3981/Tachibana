@@ -15,24 +15,27 @@ class Char_search:
             name = message[7:]
             url_search = urllib.parse.quote(name)
             search = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/search/?categories=character&datasource=tranquility&language=en-us&search=' + url_search + '&strict=false'))
-            info_url = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/characters/' + str(search['character'][0]) + '/?datasource=tranquility'))
-            zdata = json.load(urllib.request.urlopen('https://zkillboard.com/api/stats/characterID/' + str(search['character'][0]) + '/'))
             try:
-                Asearch = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/alliances/' + str(info_url['alliance_id']) + '/?datasource=tranquility'))
+                info_url = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/characters/' + str(search['character'][0]) + '/?datasource=tranquility'))
+                try:
+                    Asearch = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/alliances/' + str(info_url['alliance_id']) + '/?datasource=tranquility'))
+                except:
+                    Asearch = 'Character is not in an Alliance!'
+                Csearch = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/corporations/' + str(info_url['corporation_id']) + '/?datasource=tranquility'))
+                zdata = json.load(urllib.request.urlopen('https://zkillboard.com/api/stats/characterID/' + str(search['character'][0]) + '/'))
+                embed=discord.Embed(title=info_url['name'], color=0xfa14e9)
+                embed.set_thumbnail(url='https://imageserver.eveonline.com/Character/' + str(search['character'][0]) + '_128.jpg')
+                embed.add_field(name='Corporation', value=('Character is in ' + Csearch['name'] + ' (' + Csearch['ticker'] + ')'), inline=False)
+                try:
+                    embed.add_field(name='Alliance', value=('Character is in ' + Asearch['name'] + ' (' + Asearch['ticker'] + ')'), inline=False)
+                except:
+                    embed.add_field(name='Alliance', value=(str(Asearch)), inline=False)
+                try:
+                    embed.add_field(name='Total kills:', value= (zdata['shipsDestroyed']), inline=False)
+                except:
+                    embed.add_field(name='Total kills:', value= ('zkill deosnt exist'), inline=False)
             except:
-                Asearch = 'Character is not in an Alliance!'
-            Csearch = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/corporations/' + str(info_url['corporation_id']) + '/?datasource=tranquility'))
-            embed=discord.Embed(title=info_url['name'], color=0xfa14e9)
-            embed.set_thumbnail(url='https://imageserver.eveonline.com/Character/' + str(search['character'][0]) + '_128.jpg')
-            embed.add_field(name='Corporation', value=('Character is in ' + Csearch['name'] + ' (' + Csearch['ticker'] + ')'), inline=False)
-            try:
-                embed.add_field(name='Alliance', value=('Character is in ' + Asearch['name'] + ' (' + Asearch['ticker'] + ')'), inline=False)
-            except:
-                embed.add_field(name='Alliance', value=(str(Asearch)), inline=False)
-            try:
-                embed.add_field(name='Total kills:', value= (zdata['shipsDestroyed']), inline=False)
-            except:
-                embed.add_field(name='Total kills:', value= ('zkill deosnt exist'), inline=False)
+                embed=discord.Embed(title= 'character doesnt exist or you cant spell (lol)', color=0xfa14e9)
             
                 
             await self.client.say(embed=embed)
@@ -43,26 +46,27 @@ class Char_search:
         name = message[14:]
         url_search = urllib.parse.quote(name)
         search = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/search/?categories=character&datasource=tranquility&language=en-us&search=' + url_search + '&strict=true'))
-        info_url = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/characters/' + str(search['character'][0]) + '/?datasource=tranquility'))
-        zdata = json.load(urllib.request.urlopen('https://zkillboard.com/api/stats/characterID/' + str(search['character'][0]) + '/'))
         try:
-            Asearch = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/alliances/' + str(info_url['alliance_id']) + '/?datasource=tranquility'))
+            info_url = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/characters/' + str(search['character'][0]) + '/?datasource=tranquility'))
+            try:
+                Asearch = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/alliances/' + str(info_url['alliance_id']) + '/?datasource=tranquility'))
+            except:
+                Asearch = 'Character is not in an Alliance!'
+            Csearch = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/corporations/' + str(info_url['corporation_id']) + '/?datasource=tranquility'))
+            zdata = json.load(urllib.request.urlopen('https://zkillboard.com/api/stats/characterID/' + str(search['character'][0]) + '/'))        
+            embed=discord.Embed(title=info_url['name'], color=0xfa14e9)
+            embed.set_thumbnail(url='https://imageserver.eveonline.com/Character/' + str(search['character'][0]) + '_128.jpg')
+            embed.add_field(name='Corporation', value=('Character is in ' + Csearch['name'] + '(' + Csearch['ticker'] + ')'), inline=False)
+            try:
+                embed.add_field(name='Alliance', value=('Character is in ' + Asearch['name'] + '(' + Asearch['ticker'] + ')'), inline=False)
+            except:
+                embed.add_field(name='Alliance', value=(str(Asearch)), inline=False)
+            try:
+                embed.add_field(name='Total kills:', value= (zdata['shipsDestroyed']), inline=False)
+            except:
+                embed.add_field(name='Total kills:', value= (zdata['zkill deosnt exist']), inline=False)
         except:
-            Asearch = 'Character is not in an Alliance!'
-        Csearch = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/corporations/' + str(info_url['corporation_id']) + '/?datasource=tranquility'))
-        
-        embed=discord.Embed(title=info_url['name'], color=0xfa14e9)
-        embed.set_thumbnail(url='https://imageserver.eveonline.com/Character/' + str(search['character'][0]) + '_128.jpg')
-        embed.add_field(name='Corporation', value=('Character is in ' + Csearch['name'] + '(' + Csearch['ticker'] + ')'), inline=False)
-        try:
-            embed.add_field(name='Alliance', value=('Character is in ' + Asearch['name'] + '(' + Asearch['ticker'] + ')'), inline=False)
-        except:
-             embed.add_field(name='Alliance', value=(str(Asearch)), inline=False)
-        try:
-            embed.add_field(name='Total kills:', value= (zdata['shipsDestroyed']), inline=False)
-        except:
-            embed.add_field(name='Total kills:', value= (zdata['zkill deosnt exist']), inline=False)
-        
+            embed=discord.Embed(title= 'character doesnt exist or you cant spell (lol)', color=0xfa14e9)
             
         await self.client.say(embed=embed)
 
