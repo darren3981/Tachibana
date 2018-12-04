@@ -23,8 +23,11 @@ class Char_search:
                     Asearch = 'Character is not in an Alliance!'
                 Csearch = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/corporations/' + str(info_url['corporation_id']) + '/?datasource=tranquility'))
                 zdata = json.load(urllib.request.urlopen('https://zkillboard.com/api/stats/characterID/' + str(search['character'][0]) + '/'))
-                embed=discord.Embed(title=info_url['name'], color=0xfa14e9)
+                zlink = 'https://zkillboard.com/character/'+ str(search['character'][0])
+                wlink = 'https://evewho.com/pilot/' + url_search   
+                embed=discord.Embed(color=0xfa14e9)
                 embed.set_thumbnail(url='https://imageserver.eveonline.com/Character/' + str(search['character'][0]) + '_128.jpg')
+                embed.set_author(name=(info_url['name']), icon_url='https://imageserver.eveonline.com/Alliance/' + str(info_url['alliance_id']) + '_128.png')
                 embed.add_field(name='Corporation', value=('Character is in ' + Csearch['name'] + ' (' + Csearch['ticker'] + ')'), inline=False)
                 try:
                     embed.add_field(name='Alliance', value=('Character is in ' + Asearch['name'] + ' (' + Asearch['ticker'] + ')'), inline=False)
@@ -32,6 +35,7 @@ class Char_search:
                     embed.add_field(name='Alliance', value=(str(Asearch)), inline=False)
                 try:
                     embed.add_field(name='Total kills:', value= (zdata['shipsDestroyed']), inline=False)
+                    embed.add_field(name='Links', value= '[zkill](' + zlink + ')' + '\n' + '[evewho](' + wlink + ')', inline=False)
                 except:
                     embed.add_field(name='Total kills:', value= ('zkill doesn\'t exist'), inline=False)
             except:
@@ -53,9 +57,12 @@ class Char_search:
             except:
                 Asearch = 'Character is not in an Alliance!'
             Csearch = json.load(urllib.request.urlopen('https://esi.evetech.net/latest/corporations/' + str(info_url['corporation_id']) + '/?datasource=tranquility'))
-            zdata = json.load(urllib.request.urlopen('https://zkillboard.com/api/stats/characterID/' + str(search['character'][0]) + '/'))        
-            embed=discord.Embed(title=info_url['name'], color=0xfa14e9)
+            zdata = json.load(urllib.request.urlopen('https://zkillboard.com/api/stats/characterID/' + str(search['character'][0]) + '/')) 
+            zlink = 'https://zkillboard.com/character/'+ str(search['character'][0])
+            wlink = 'https://evewho.com/pilot/' + url_search   
+            embed=discord.Embed(color=0xfa14e9)
             embed.set_thumbnail(url='https://imageserver.eveonline.com/Character/' + str(search['character'][0]) + '_128.jpg')
+            embed.set_author(name=(info_url['name']), icon_url='https://imageserver.eveonline.com/Alliance/' + str(info_url['alliance_id']) + '_128.png')
             embed.add_field(name='Corporation', value=('Character is in ' + Csearch['name'] + '(' + Csearch['ticker'] + ')'), inline=False)
             try:
                 embed.add_field(name='Alliance', value=('Character is in ' + Asearch['name'] + '(' + Asearch['ticker'] + ')'), inline=False)
@@ -63,8 +70,11 @@ class Char_search:
                 embed.add_field(name='Alliance', value=(str(Asearch)), inline=False)
             try:
                 embed.add_field(name='Total kills:', value= (zdata['shipsDestroyed']), inline=False)
+                embed.add_field(name='Links', value= '[zkill](' + zlink + ')' + '\n' + '[evewho](' + wlink + ')', inline=False)
+                
             except:
                 embed.add_field(name='Total kills:', value= (zdata['zkill doesn\'t exist']), inline=False)
+                
         except:
             embed=discord.Embed(title= 'character doesn\'t exist or you cant spell (lol)', color=0xfa14e9)
             
