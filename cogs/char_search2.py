@@ -27,7 +27,10 @@ class Char_search:
                 wlink = 'https://evewho.com/pilot/' + url_search   
                 embed=discord.Embed(color=0xfa14e9)
                 embed.set_thumbnail(url='https://imageserver.eveonline.com/Character/' + str(search['character'][0]) + '_128.jpg')
-                embed.set_author(name=(info_url['name']), icon_url='https://imageserver.eveonline.com/Alliance/' + str(info_url['alliance_id']) + '_128.png')
+                try:
+                    embed.set_author(name=(info_url['name']), icon_url='https://imageserver.eveonline.com/Alliance/' + str(info_url['alliance_id']) + '_128.png')
+                except:
+                    embed.set_author(name=(info_url['name']))
                 embed.add_field(name='Corporation', value=('Character is in ' + Csearch['name'] + ' (' + Csearch['ticker'] + ')'), inline=False)
                 try:
                     embed.add_field(name='Alliance', value=('Character is in ' + Asearch['name'] + ' (' + Asearch['ticker'] + ')'), inline=False)
