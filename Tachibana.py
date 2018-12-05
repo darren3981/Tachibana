@@ -2,6 +2,7 @@ import discord
 import asyncio
 from discord import Game
 from discord.ext import commands
+from cogs.killpost import killpost
 
 
 #TOKEN = 'token goes in discord_token file'
@@ -65,4 +66,5 @@ if __name__ == '__main__':# sets file as main and starts bot
             print('{} connot be loaded.[{}]'.format(extension,error))
     with open('Tachibana_token.txt','r') as f:
         key = f.readline()
+    client.loop.create_task(killpost(client).killpost())   
     client.run(key)
